@@ -8,6 +8,7 @@ module.exports = {
     appBundleId: 'com.eanyatonic.cctvviewer',
     icon: './src/assets/icons/icon',
     asar: true,
+    arch: ['ia32', 'x64'],
     win32metadata: {
       CompanyName: 'Eanya-Tonic',
       FileDescription: '电视浏览器 - Windows版',
