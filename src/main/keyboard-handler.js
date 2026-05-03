@@ -1,4 +1,4 @@
-const { ipcMain } = require('electron');
+const { globalShortcut, ipcMain } = require('electron');
 
 class KeyboardHandler {
   constructor(windowManager) {
@@ -11,47 +11,25 @@ class KeyboardHandler {
     this.mainWindow = this.windowManager.getMainWindow();
     if (!this.mainWindow) return;
 
-    this.mainWindow.webContents.on('before-input-event', (event, input) => {
-      if (input.type !== 'keyDown') return;
+    // 注册全局快捷键
+    const shortcuts = [
+      { key: 'Up', channel: 'keyboard:up' },
+      { key: 'Down', channel: 'keyboard:down' },
+      { key: 'Enter', channel: 'keyboard:enter' },
+      { key: 'M', channel: 'keyboard:menu' },
+      { key: 'Esc', channel: 'keyboard:back' },
+      { key: 'B', channel: 'keyboard:back' },
+      { key: 'R', channel: 'keyboard:refresh' },
+      { key: 'Plus', channel: 'keyboard:zoom-in' },
+      { key: 'Numadd', channel: 'keyboard:zoom-in' },
+      { key: '-', channel: 'keyboard:zoom-out' },
+      { key: 'Numsub', channel: 'keyboard:zoom-out' }
+    ];
 
-      const key = input.code;
-      const isOverlayOpen = this.isOverlayOpen();
-
-      switch (key) {
-        case 'ArrowUp':
-          if (!isOverlayOpen) {
-            event.preventDefault();
-            this.sendToRenderer('keyboard:up');
-          }
-          break;
-        case 'ArrowDown':
-          if (!isOverlayOpen) {
-            event.preventDefault();
-            this.sendToRenderer('keyboard:down');
-          }
-          break;
-        case 'Enter':
-          if (!isOverlayOpen) {
-            event.preventDefault();
-            this.sendToRenderer('keyboard:enter');
-          }
-          break;
-        case 'KeyM':
-          event.preventDefault();
-          this.sendToRenderer('keyboard:menu');
-          break;
-        case 'Escape':
-        case 'KeyB':
-          event.preventDefault();
-          this.sendToRenderer('keyboard:back');
-          break;
-        case 'KeyR':
-          if (!input.control && !input.meta) {
-            event.preventDefault();
-            this.sendToRenderer('keyboard:refresh');
-          }
-          break;
-      }
+    shortcuts.forEach(({ key, channel }) => {
+      globalShortcut.register(key, () => {
+        this.sendToRenderer(channel);
+      });
     });
   }
 
@@ -61,11 +39,8 @@ class KeyboardHandler {
     }
   }
 
-  isOverlayOpen() {
-    return false;
-  }
-
   unregister() {
+    globalShortcut.unregisterAll();
     this.mainWindow = null;
   }
 }

@@ -94,4 +94,4 @@ class MenuOverlay {
   }
 }
 
-module.exports = MenuOverlay;
+

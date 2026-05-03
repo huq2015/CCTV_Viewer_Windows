@@ -20,4 +20,4 @@ class LoadingOverlay {
   }
 }
 
-module.exports = LoadingOverlay;
+

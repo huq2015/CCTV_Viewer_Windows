@@ -5,21 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src *; connect-src *; frame-src *;">
   <title>电视浏览器</title>
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/channel-list.css">
-  <link rel="stylesheet" href="styles/menu.css">
-  <link rel="stylesheet" href="styles/settings.css">
-</head>
+<script defer src="/main_window/index.js"></script></head>
 <body>
   <div id="app">
     <webview
       id="tv-webview"
       src="about:blank"
+      useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
       allowpopups="false"
       nodeintegration="false"
       partition="persist:webview"
-      webpreferences="contextIsolation=true, nodeIntegration=false, allowRunningInsecureContent=true"
-      disablewebsecurity="true"
+      webpreferences="contextIsolation=true, nodeIntegration=false"
     ></webview>
 
     <div id="loading-overlay" class="overlay loading-overlay">
@@ -37,9 +33,7 @@
           <div class="category-item settings-trigger">打开设置</div>
         </div>
         <div class="channel-list-content">
-          <div class="channel-list-items-wrapper">
-            <div class="channel-items" id="channel-items"></div>
-          </div>
+          <div class="channel-items" id="channel-items"></div>
         </div>
       </div>
     </div>
@@ -77,9 +71,6 @@
       <div class="settings-container">
         <div class="settings-header">
           <h2>设置</h2>
-          <button class="settings-close-btn" id="settings-close-btn" title="关闭设置">
-            <span class="close-icon">✕</span>
-          </button>
         </div>
         <div class="settings-content">
           <div class="settings-section">
@@ -118,43 +109,6 @@
             </div>
           </div>
           <div class="settings-section">
-            <h3>键盘快捷键</h3>
-            <div class="settings-shortcuts">
-              <div class="shortcut-row">
-                <span class="shortcut-key">↑ ↓</span>
-                <span class="shortcut-desc">切换频道 / 列表移动</span>
-              </div>
-              <div class="shortcut-row">
-                <span class="shortcut-key">←</span>
-                <span class="shortcut-desc">返回上级 / 关闭抽屉</span>
-              </div>
-              <div class="shortcut-row">
-                <span class="shortcut-key">→</span>
-                <span class="shortcut-desc">切换分类</span>
-              </div>
-              <div class="shortcut-row">
-                <span class="shortcut-key">Enter</span>
-                <span class="shortcut-desc">确认选择 / 打开频道列表</span>
-              </div>
-              <div class="shortcut-row">
-                <span class="shortcut-key">M</span>
-                <span class="shortcut-desc">打开/关闭底部菜单</span>
-              </div>
-              <div class="shortcut-row">
-                <span class="shortcut-key">Esc / B</span>
-                <span class="shortcut-desc">返回 / 退出应用</span>
-              </div>
-              <div class="shortcut-row">
-                <span class="shortcut-key">R</span>
-                <span class="shortcut-desc">刷新页面</span>
-              </div>
-              <div class="shortcut-row">
-                <span class="shortcut-key">+ / -</span>
-                <span class="shortcut-desc">放大 / 缩小页面</span>
-              </div>
-            </div>
-          </div>
-          <div class="settings-section">
             <h3>关于</h3>
             <div class="about-item">
               <span class="about-label">应用名称</span>
@@ -173,16 +127,5 @@
       </div>
     </div>
   </div>
-
-  <script src="utils/constants.js"></script>
-  <script src="utils/ipc-client.js"></script>
-  <script src="utils/channel-manager.js"></script>
-  <script src="webview/inject-scripts.js"></script>
-  <script src="webview/webview-controller.js"></script>
-  <script src="components/LoadingOverlay.js"></script>
-  <script src="components/ChannelList.js"></script>
-  <script src="components/MenuOverlay.js"></script>
-  <script src="components/SettingsPanel.js"></script>
-  <script src="index.js"></script>
 </body>
 </html>

@@ -21,6 +21,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
       'keyboard:menu',
       'keyboard:back',
       'keyboard:refresh',
+      'keyboard:zoom-in',
+      'keyboard:zoom-out',
       'store:get-response',
       'store:set-response'
     ];
@@ -30,6 +32,14 @@ contextBridge.exposeInMainWorld('electronAPI', {
   },
   once: (channel, callback) => {
     const validChannels = [
+      'keyboard:up',
+      'keyboard:down',
+      'keyboard:enter',
+      'keyboard:menu',
+      'keyboard:back',
+      'keyboard:refresh',
+      'keyboard:zoom-in',
+      'keyboard:zoom-out',
       'store:get-response',
       'store:set-response'
     ];

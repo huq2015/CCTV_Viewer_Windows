@@ -91,10 +91,4 @@ function getFullscreenToggleScript() {
   `;
 }
 
-module.exports = {
-  getFastLoadingScript,
-  getAutoFullscreenScript,
-  getZoomScript,
-  getPlayPauseScript,
-  getFullscreenToggleScript
-};
+

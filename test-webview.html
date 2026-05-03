@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>WebView Test</title>
+  <style>
+    body { margin: 0; padding: 20px; font-family: Arial, sans-serif; }
+    #webview-container { width: 800px; height: 600px; border: 2px solid #333; }
+    webview { width: 100%; height: 100%; }
+    #logs { margin-top: 20px; padding: 10px; background: #f0f0f0; height: 200px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <h1>WebView Diagnostic Test</h1>
+  <div id="webview-container">
+    <webview id="test-webview" src="about:blank" webpreferences="contextIsolation=true, nodeIntegration=false"></webview>
+  </div>
+  <div>
+    <button onclick="loadUrl('https://tv.cctv.com/live/cctv1/')">Load CCTV-1</button>
+    <button onclick="loadUrl('https://www.baidu.com')">Load Baidu</button>
+    <button onclick="checkWebview()">Check WebView Status</button>
+  </div>
+  <div id="logs"></div>
+
+  <script>
+    const webview = document.getElementById('test-webview');
+    const logs = document.getElementById('logs');
+
+    function log(message) {
+      const div = document.createElement('div');
+      div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logs.appendChild(div);
+      logs.scrollTop = logs.scrollHeight;
+    }
+
+    webview.addEventListener('dom-ready', () => {
+      log('DOM Ready');
+    });
+
+    webview.addEventListener('did-finish-load', () => {
+      log('Load Finished: ' + webview.src);
+    });
+
+    webview.addEventListener('did-fail-load', (e) => {
+      log('Load Failed: ' + e.errorDescription + ' (Code: ' + e.errorCode + ')');
+    });
+
+    webview.addEventListener('did-start-loading', () => {
+      log('Started Loading');
+    });
+
+    webview.addEventListener('did-stop-loading', () => {
+      log('Stopped Loading');
+    });
+
+    webview.addEventListener('console-message', (e) => {
+      log('Console: ' + e.message);
+    });
+
+    function loadUrl(url) {
+      log('Loading: ' + url);
+      webview.src = url;
+    }
+
+    function checkWebview() {
+      log('WebView src: ' + webview.src);
+      log('WebView ready: ' + (webview.getWebContentsId ? 'Yes' : 'No'));
+    }
+
+    log('Test page loaded');
+  </script>
+</body>
+</html>

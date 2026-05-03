@@ -1,4 +1,4 @@
-const CHANNELS = [
+var CHANNELS = [
   { id: 0,  name: "CCTV-1 综合",       category: "cctv", url: "https://tv.cctv.com/live/cctv1/" },
   { id: 1,  name: "CCTV-2 财经",       category: "cctv", url: "https://tv.cctv.com/live/cctv2/" },
   { id: 2,  name: "CCTV-3 综艺",       category: "cctv", url: "https://tv.cctv.com/live/cctv3/" },
@@ -42,7 +42,7 @@ const CHANNELS = [
   { id: 40, name: "山东卫视",  category: "local", url: "https://www.yangshipin.cn/tv/home?pid=600002513" }
 ];
 
-const KEYBOARD = {
+var KEYBOARD = {
   ARROW_UP: 'ArrowUp',
   ARROW_DOWN: 'ArrowDown',
   ARROW_LEFT: 'ArrowLeft',
@@ -56,7 +56,7 @@ const KEYBOARD = {
   ZOOM_OUT: 'Minus'
 };
 
-const UI = {
+var UI = {
   COLORS: {
     BG_PRIMARY: '#000000',
     BG_OVERLAY: 'rgba(0, 0, 0, 0.85)',
@@ -93,7 +93,7 @@ const UI = {
   }
 };
 
-const IPC_CHANNELS = {
+var IPC_CHANNELS = {
   KEYBOARD_UP: 'keyboard:up',
   KEYBOARD_DOWN: 'keyboard:down',
   KEYBOARD_ENTER: 'keyboard:enter',
@@ -107,16 +107,8 @@ const IPC_CHANNELS = {
   WINDOW_EXIT_FULLSCREEN: 'window:exit-fullscreen'
 };
 
-const DEFAULT_SETTINGS = {
+var DEFAULT_SETTINGS = {
   directChannelChange: false,
   directBack: true,
   textSize: 'medium'
-};
-
-module.exports = {
-  CHANNELS,
-  KEYBOARD,
-  UI,
-  IPC_CHANNELS,
-  DEFAULT_SETTINGS
 };

@@ -68,6 +68,14 @@ class IpcClient {
   onKeyboardRefresh(callback) {
     this.on('keyboard:refresh', callback);
   }
+
+  onKeyboardZoomIn(callback) {
+    this.on('keyboard:zoom-in', callback);
+  }
+
+  onKeyboardZoomOut(callback) {
+    this.on('keyboard:zoom-out', callback);
+  }
 }
 
-module.exports = IpcClient;
+

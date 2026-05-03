@@ -17,13 +17,19 @@ class WindowManager {
         nodeIntegration: false,
         contextIsolation: true,
         preload: path.join(__dirname, 'preload.js'),
-        webviewTag: true
+        webviewTag: true,
+        sandbox: false
       },
       show: false,
       icon: path.join(__dirname, '../assets/icons/icon.png')
     });
 
     this.mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
+
+    // 开发者工具仅在开发环境打开（可通过环境变量控制）
+    if (process.env.NODE_ENV === 'development' || process.env.DEBUG === 'true') {
+      this.mainWindow.webContents.openDevTools();
+    }
 
     this.mainWindow.once('ready-to-show', () => {
       this.mainWindow.show();

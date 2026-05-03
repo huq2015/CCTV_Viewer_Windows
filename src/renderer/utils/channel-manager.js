@@ -1,5 +1,3 @@
-const { CHANNELS } = require('./constants');
-
 class ChannelManager {
   constructor(ipcClient) {
     this.ipcClient = ipcClient;
@@ -53,5 +51,3 @@ class ChannelManager {
     ];
   }
 }
-
-module.exports = ChannelManager;
