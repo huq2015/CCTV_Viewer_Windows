@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>电视浏览器</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/channel-list.css">
+  <link rel="stylesheet" href="styles/menu.css">
+  <link rel="stylesheet" href="styles/settings.css">
+</head>
+<body>
+  <div id="app">
+    <webview
+      id="tv-webview"
+      src="about:blank"
+      useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+      allowpopups="false"
+      nodeintegration="false"
+      partition="persist:webview"
+    ></webview>
+
+    <div id="loading-overlay" class="overlay loading-overlay">
+      <div class="loading-content">
+        <div class="loading-text">正在切换频道...</div>
+        <div class="loading-subtext">当前程序运行在 Chromium 内核上</div>
+      </div>
+    </div>
+
+    <div id="channel-list" class="overlay channel-list-overlay">
+      <div class="channel-list-container">
+        <div class="channel-list-sidebar">
+          <div class="category-item active" data-category="cctv">央视频道</div>
+          <div class="category-item" data-category="local">地方频道</div>
+          <div class="category-item settings-trigger">打开设置</div>
+        </div>
+        <div class="channel-list-content">
+          <div class="channel-items" id="channel-items"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="menu-overlay" class="overlay menu-overlay">
+      <div class="menu-container">
+        <button class="menu-item" data-action="refresh">
+          <span class="menu-icon">🔄</span>
+          <span class="menu-label">刷新页面</span>
+        </button>
+        <button class="menu-item" data-action="play-pause">
+          <span class="menu-icon">▶️</span>
+          <span class="menu-label">播放/暂停</span>
+        </button>
+        <button class="menu-item" data-action="fullscreen">
+          <span class="menu-icon">⛶</span>
+          <span class="menu-label">切换全屏</span>
+        </button>
+        <button class="menu-item" data-action="zoom-in">
+          <span class="menu-icon">🔍+</span>
+          <span class="menu-label">放大页面</span>
+        </button>
+        <button class="menu-item" data-action="zoom-out">
+          <span class="menu-icon">🔍-</span>
+          <span class="menu-label">缩小页面</span>
+        </button>
+        <button class="menu-item" data-action="settings">
+          <span class="menu-icon">⚙️</span>
+          <span class="menu-label">打开设置</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="settings-panel" class="overlay settings-overlay">
+      <div class="settings-container">
+        <div class="settings-header">
+          <h2>设置</h2>
+        </div>
+        <div class="settings-content">
+          <div class="settings-section">
+            <h3>界面与操作设置</h3>
+            <div class="setting-item">
+              <label class="setting-label">
+                <span>启用直接换台</span>
+                <span class="setting-desc">按上下键时，直接换台，而不是弹出换台抽屉</span>
+              </label>
+              <label class="switch">
+                <input type="checkbox" id="setting-direct-channel-change">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">
+                <span>换台抽屉直接返回</span>
+                <span class="setting-desc">在换台抽屉中按返回键时，直接关闭抽屉</span>
+              </label>
+              <label class="switch">
+                <input type="checkbox" id="setting-direct-back">
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <label class="setting-label">
+                <span>换台抽屉字体</span>
+                <span class="setting-desc">设置换台抽屉字体大小</span>
+              </label>
+              <select id="setting-text-size">
+                <option value="small">较小</option>
+                <option value="medium" selected>适中</option>
+                <option value="large">偏大</option>
+                <option value="xlarge">特大</option>
+              </select>
+            </div>
+          </div>
+          <div class="settings-section">
+            <h3>关于</h3>
+            <div class="about-item">
+              <span class="about-label">应用名称</span>
+              <span class="about-value">电视浏览器</span>
+            </div>
+            <div class="about-item">
+              <span class="about-label">版本号</span>
+              <span class="about-value">Version 1.0.0</span>
+            </div>
+            <div class="about-item">
+              <span class="about-label">操作系统</span>
+              <span class="about-value" id="os-info">Windows</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>
